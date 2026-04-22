@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apex Horizon Moto Concept</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+  <style>
+    :root {
+      --orange: #FF6600;
+      --orange-dark: #cc5200;
+      --orange-glow: rgba(255,102,0,0.25);
+      --charcoal: #333333;
+      --midnight: #1A1A1A;
+      --silver: #C0C0C0;
+      --off-white: #F2F0EC;
+      --bg-dark: #111111;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--bg-dark);
+      color: var(--off-white);
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── TYPOGRAPHY ── */
+    .display-title {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.04em;
+      line-height: 0.95;
+    }
+    .label-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+    }
+
+    /* ── NAVBAR ── */
+    .navbar-custom {
+      background: rgba(17,17,17,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,102,0,0.15);
+      padding: 1rem 0;
+      transition: all 0.3s ease;
+    }
+    .navbar-brand {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.1em;
+      color: var(--off-white) !important;
+    }
+    .navbar-brand span { color: var(--orange); }
+    .nav-link {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+      color: var(--silver) !important;
+      transition: color 0.2s;
+      padding: 0.5rem 1rem !important;
+    }
+    .nav-link:hover { color: var(--orange) !important; }
+    .nav-cta {
+      background: var(--orange);
+      color: var(--midnight) !important;
+      border-radius: 2px;
+      padding: 0.5rem 1.4rem !important;
+      font-weight: 700;
+    }
+    .nav-cta:hover { background: var(--orange-dark); color: #fff !important; }
+    .navbar-toggler { border-color: var(--orange); }
+    .navbar-toggler-icon { filter: invert(55%) sepia(90%) saturate(500%) hue-rotate(0deg); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--midnight);
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(135deg, rgba(17,17,17,0.97) 40%, rgba(255,102,0,0.08) 100%),
+        url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80') center/cover no-repeat;
+    }
+    .hero-grid-lines {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,102,0,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,102,0,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255,102,0,0.1);
+      border: 1px solid rgba(255,102,0,0.3);
+      color: var(--orange);
+      border-radius: 2px;
+      padding: 0.35rem 0.9rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-size: clamp(4rem, 10vw, 10rem);
+      color: var(--off-white);
+    }
+    .hero-title .accent { color: var(--orange); }
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-weight: 300;
+      color: var(--silver);
+      max-width: 520px;
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+    }
+    .stat-item { border-left: 2px solid var(--orange); padding-left: 1rem; }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.4rem;
+      color: var(--off-white);
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--silver);
+    }
+    .hero-cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary-apex {
+      background: var(--orange);
+      color: var(--midnight);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-size: 0.88rem;
+      padding: 0.9rem 2rem;
+      border: none;
+      border-radius: 2px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: all 0.25s;
+    }
+    .btn-primary-apex:hover {
+      background: #fff;
+      color: var(--midnight);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px var(--orange-glow);
+    }
+    .btn-outline-apex {
+      background: transparent;
+      color: var(--off-white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-size: 0.88rem;
+      padding: 0.9rem 2rem;
+      border: 1px solid rgba(240,240,235,0.3);
+      border-radius: 2px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: all 0.25s;
+    }
+    .btn-outline-apex:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+      transform: translateY(-2px);
+    }
+    .hero-scroll-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, var(--orange), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 1; transform: scaleY(1); }
+      50% { opacity: 0.4; transform: scaleY(0.6); }
+    }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: 7rem 0; }
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      color: var(--orange);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 2px;
+      background: var(--orange);
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      line-height: 0.95;
+      color: var(--off-white);
+    }
+    .section-title .accent { color: var(--orange); }
+
+    /* ── SOBRE ── */
+    #sobre { background: var(--midnight); }
+    .sobre-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 4px;
+      padding: 2rem;
+      height: 100%;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .sobre-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--orange);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .sobre-card:hover { border-color: rgba(255,102,0,0.3); transform: translateY(-4px); }
+    .sobre-card:hover::before { transform: scaleX(1); }
+    .sobre-icon {
+      font-size: 2rem;
+      color: var(--orange);
+      margin-bottom: 1.2rem;
+    }
+    .sobre-card h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--off-white);
+      margin-bottom: 0.75rem;
+    }
+    .sobre-card p {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--silver);
+      font-weight: 300;
+    }
+
+    /* ── PÚBLICO ALVO ── */
+    #publico { background: #131313; }
+    .publico-tab-nav {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+      color: var(--silver);
+      padding: 1rem 1.8rem;
+      position: relative;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+    .tab-btn::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 0; right: 0;
+      height: 2px;
+      background: var(--orange);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+    .tab-btn.active { color: var(--orange); }
+    .tab-btn.active::after { transform: scaleX(1); }
+    .tab-content-custom { display: none; }
+    .tab-content-custom.active { display: flex; gap: 3rem; flex-wrap: wrap; align-items: center; }
+    .publico-img-wrap {
+      flex: 1; min-width: 280px;
+      position: relative;
+    }
+    .publico-img-wrap img {
+      width: 100%;
+      border-radius: 4px;
+      filter: grayscale(30%);
+      transition: filter 0.4s;
+    }
+    .publico-img-wrap:hover img { filter: grayscale(0%); }
+    .publico-img-tag {
+      position: absolute;
+      bottom: 1.2rem; left: 1.2rem;
+      background: var(--orange);
+      color: var(--midnight);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.8rem;
+      border-radius: 2px;
+    }
+    .publico-info { flex: 1; min-width: 280px; }
+    .publico-info h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      color: var(--off-white);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .publico-info p {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--silver);
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+    .publico-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag {
+      background: rgba(255,102,0,0.1);
+      border: 1px solid rgba(255,102,0,0.25);
+      color: var(--orange);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 2px;
+    }
+
+    /* ── SOLUÇÕES ── */
+    #solucoes { background: var(--midnight); }
+    .solucao-card {
+      background: #1a1a1a;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: all 0.35s;
+      height: 100%;
+    }
+    .solucao-card:hover {
+      border-color: var(--orange);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+    .solucao-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      filter: brightness(0.75) saturate(0.8);
+      transition: all 0.4s;
+    }
+    .solucao-card:hover .solucao-img { filter: brightness(0.9) saturate(1.1); }
+    .solucao-body { padding: 1.8rem; }
+    .solucao-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      color: rgba(255,102,0,0.15);
+      line-height: 1;
+      float: right;
+      margin-top: -0.5rem;
+    }
+    .solucao-body h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--off-white);
+      margin-bottom: 0.75rem;
+    }
+    .solucao-body p {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--silver);
+      font-weight: 300;
+    }
+    .solucao-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 1rem;
+      color: var(--orange);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: gap 0.2s;
+    }
+    .solucao-link:hover { gap: 0.8rem; color: var(--orange); }
+
+    /* ── LOUNGE ── */
+    #lounge {
+      background: #131313;
+      position: relative;
+      overflow: hidden;
+    }
+    #lounge::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(255,102,0,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .lounge-feature {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      align-items: flex-start;
+    }
+    .lounge-feature-icon {
+      width: 44px; height: 44px;
+      min-width: 44px;
+      background: rgba(255,102,0,0.1);
+      border: 1px solid rgba(255,102,0,0.25);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--orange);
+      font-size: 1rem;
+    }
+    .lounge-feature h5 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--off-white);
+      margin-bottom: 0.3rem;
+    }
+    .lounge-feature p {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--silver);
+      font-weight: 300;
+      margin: 0;
+    }
+    .lounge-visual {
+      position: relative;
+    }
+    .lounge-main-img {
+      width: 100%;
+      border-radius: 4px;
+      filter: brightness(0.8) saturate(0.85);
+    }
+    .lounge-badge-float {
+      position: absolute;
+      bottom: -1.5rem;
+      left: -1.5rem;
+      background: var(--midnight);
+      border: 1px solid rgba(255,102,0,0.3);
+      border-radius: 4px;
+      padding: 1.2rem 1.6rem;
+    }
+    .lounge-badge-float .big-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: var(--orange);
+      line-height: 1;
+    }
+    .lounge-badge-float .badge-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--silver);
+    }
+
+    /* ── RIDE DAYS ── */
+    #ride-days { background: var(--midnight); }
+    .ride-event-card {
+      background: #1d1d1d;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 4px;
+      padding: 1.8rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      transition: all 0.3s;
+      margin-bottom: 1rem;
+    }
+    .ride-event-card:hover {
+      border-color: rgba(255,102,0,0.4);
+      transform: translateX(6px);
+    }
+    .event-date {
+      text-align: center;
+      min-width: 60px;
+    }
+    .event-date .day {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      color: var(--orange);
+      line-height: 1;
+    }
+    .event-date .month {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--silver);
+    }
+    .event-divider {
+      width: 1px;
+      height: 50px;
+      background: rgba(255,255,255,0.1);
+    }
+    .event-info h5 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--off-white);
+      margin-bottom: 0.25rem;
+    }
+    .event-info p {
+      font-size: 0.85rem;
+      color: var(--silver);
+      font-weight: 300;
+      margin: 0;
+    }
+    .event-badge {
+      margin-left: auto;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 2px;
+    }
+    .badge-open { background: rgba(255,102,0,0.15); color: var(--orange); border: 1px solid rgba(255,102,0,0.3); }
+    .badge-limited { background: rgba(255,200,0,0.1); color: #ffcc00; border: 1px solid rgba(255,200,0,0.3); }
+    .badge-sold { background: rgba(255,255,255,0.06); color: var(--silver); border: 1px solid rgba(255,255,255,0.1); }
+
+    /* ── DEPOIMENTOS ── */
+    #depoimentos { background: #131313; }
+    .depo-card {
+      background: #1a1a1a;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 4px;
+      padding: 2rem;
+      height: 100%;
+      position: relative;
+    }
+    .depo-quote {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem;
+      color: var(--orange);
+      opacity: 0.3;
+      line-height: 0.8;
+      margin-bottom: 1rem;
+    }
+    .depo-text {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: var(--silver);
+      font-weight: 300;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+    }
+    .depo-author { display: flex; align-items: center; gap: 1rem; }
+    .depo-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--orange);
+    }
+    .depo-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--off-white);
+    }
+    .depo-moto {
+      font-size: 0.78rem;
+      color: var(--silver);
+      font-weight: 300;
+    }
+    .depo-stars { color: var(--orange); font-size: 0.75rem; }
+
+    /* ── MARCAS ── */
+    #marcas {
+      background: var(--midnight);
+      padding: 4rem 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .marcas-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      color: rgba(192,192,192,0.5);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .marcas-track {
+      display: flex;
+      gap: 4rem;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .marca-item {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.1em;
+      color: rgba(192,192,192,0.25);
+      transition: color 0.3s;
+      cursor: default;
+    }
+    .marca-item:hover { color: rgba(255,102,0,0.7); }
+
+    /* ── CTA / CONFIGURADOR ── */
+    #configurador {
+      background: var(--midnight);
+      position: relative;
+      overflow: hidden;
+    }
+    #configurador::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,102,0,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .config-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,102,0,0.2);
+      border-radius: 4px;
+      padding: 3rem;
+      position: relative;
+      z-index: 1;
+    }
+    .config-form-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--silver);
+      margin-bottom: 0.5rem;
+    }
+    .config-form-control {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 2px;
+      color: var(--off-white);
+      padding: 0.75rem 1rem;
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.95rem;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .config-form-control:focus {
+      outline: none;
+      border-color: var(--orange);
+      background: rgba(255,102,0,0.04);
+    }
+    .config-form-control option { background: var(--midnight); }
+    select.config-form-control {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23FF6600' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+    }
+
+    /* ── CONTATO ── */
+    #contato { background: #131313; }
+    .contato-info-item {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      align-items: flex-start;
+    }
+    .contato-icon {
+      width: 40px; height: 40px;
+      min-width: 40px;
+      background: rgba(255,102,0,0.1);
+      border: 1px solid rgba(255,102,0,0.25);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--orange);
+      font-size: 0.9rem;
+    }
+    .contato-info-item h6 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--silver);
+      margin-bottom: 0.25rem;
+    }
+    .contato-info-item p {
+      font-size: 0.95rem;
+      color: var(--off-white);
+      margin: 0;
+    }
+    .map-placeholder {
+      width: 100%;
+      height: 280px;
+      background: #1a1a1a;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--silver);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .map-placeholder i { font-size: 2rem; color: var(--orange); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0d0d0d;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 4rem 0 2rem;
+    }
+    .footer-brand {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      letter-spacing: 0.08em;
+      color: var(--off-white);
+      margin-bottom: 1rem;
+    }
+    .footer-brand span { color: var(--orange); }
+    .footer-desc {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: var(--silver);
+      font-weight: 300;
+      max-width: 300px;
+    }
+    .footer-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 1.2rem;
+    }
+    .footer-links { list-style: none; padding: 0; }
+    .footer-links li { margin-bottom: 0.6rem; }
+    .footer-links a {
+      color: var(--silver);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 300;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--orange); }
+    .footer-social { display: flex; gap: 0.75rem; margin-top: 1.5rem; }
+    .social-btn {
+      width: 38px; height: 38px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--silver);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+    .social-btn:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+      background: rgba(255,102,0,0.1);
+    }
+    .footer-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      margin: 2.5rem 0 1.5rem;
+    }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.8rem;
+      color: rgba(192,192,192,0.45);
+      font-weight: 300;
+    }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-up-delay-1 { transition-delay: 0.1s; }
+    .fade-up-delay-2 { transition-delay: 0.2s; }
+    .fade-up-delay-3 { transition-delay: 0.3s; }
+    .fade-up-delay-4 { transition-delay: 0.4s; }
+
+    /* ── ORANGE HR ── */
+    .orange-hr {
+      border: none;
+      height: 2px;
+      background: linear-gradient(to right, var(--orange), transparent);
+      margin: 3rem 0;
+    }
+
+    /* ── MISC ── */
+    ::selection { background: var(--orange); color: var(--midnight); }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--midnight); }
+    ::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 2px; }
+
+    @media (max-width: 768px) {
+      section { padding: 4rem 0; }
+      .hero-stats { gap: 1.5rem; }
+      .lounge-badge-float { position: static; margin-top: 1rem; }
+      .tab-btn { padding: 0.75rem 1rem; font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ NAVBAR ══════════════ -->
+<nav class="navbar navbar-expand-lg navbar-custom fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="#">APEX <span>HORIZON</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+        <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
+        <li class="nav-item"><a class="nav-link" href="#solucoes">Soluções</a></li>
+        <li class="nav-item"><a class="nav-link" href="#lounge">The Lounge</a></li>
+        <li class="nav-item"><a class="nav-link" href="#ride-days">Ride Days</a></li>
+        <li class="nav-item"><a class="nav-link" href="#depoimentos">Reviews</a></li>
+        <li class="nav-item ms-lg-2"><a class="nav-link nav-cta" href="#configurador">Configurar Moto</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="container hero-content py-5 mt-5">
+    <div class="row">
+      <div class="col-lg-10">
+        <div class="hero-badge fade-up">
+          <i class="fa-solid fa-bolt"></i>
+          Performance · Adventure · Lifestyle
+        </div>
+        <h1 class="display-title hero-title fade-up fade-up-delay-1">
+          APEX<br><span class="accent">HORIZON</span><br>MOTO CONCEPT
+        </h1>
+        <p class="hero-subtitle fade-up fade-up-delay-2">
+          Mais do que uma loja. Uma experiência completa para quem vive sobre duas rodas — com curadoria premium, customização exclusiva e uma comunidade apaixonada.
+        </p>
+        <div class="hero-cta-group fade-up fade-up-delay-3">
+          <a href="#solucoes" class="btn-primary-apex">
+            <i class="fa-solid fa-arrow-right"></i>
+            Ver Soluções
+          </a>
+          <a href="#lounge" class="btn-outline-apex">
+            <i class="fa-solid fa-mug-hot"></i>
+            The Rider's Lounge
+          </a>
+        </div>
+        <div class="hero-stats fade-up fade-up-delay-4">
+          <div class="stat-item">
+            <div class="stat-num">+500</div>
+            <div class="stat-label">Motos Entregues</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">+120</div>
+            <div class="stat-label">Marcas Disponíveis</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">8</div>
+            <div class="stat-label">Anos de Estrada</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">4.9★</div>
+            <div class="stat-label">Avaliação Média</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll-indicator">
+    <span class="label-text" style="color:rgba(192,192,192,0.4);font-size:0.6rem;">SCROLL</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ══════════════ MARCAS ══════════════ -->
+<div id="marcas">
+  <div class="container">
+    <p class="marcas-label">Trabalhamos com as melhores marcas do mercado</p>
+    <div class="marcas-track">
+      <span class="marca-item">HONDA</span>
+      <span class="marca-item">YAMAHA</span>
+      <span class="marca-item">KAWASAKI</span>
+      <span class="marca-item">BMW</span>
+      <span class="marca-item">DUCATI</span>
+      <span class="marca-item">TRIUMPH</span>
+      <span class="marca-item">KTM</span>
+      <span class="marca-item">SUZUKI</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ SOBRE ══════════════ -->
+<section id="sobre">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-lg-6 fade-up">
+        <div class="section-label">Quem Somos</div>
+        <h2 class="section-title">UMA MARCA TÉCNICA<br><span class="accent">E ASPIRACIONAL</span></h2>
+      </div>
+      <div class="col-lg-6 fade-up fade-up-delay-1 d-flex align-items-end">
+        <p style="font-size:1rem;line-height:1.8;color:var(--silver);font-weight:300;">
+          Nascemos da paixão pelo asfalto e pela liberdade de duas rodas. A Apex Horizon reúne expertise técnica, curadoria premium e espírito de comunidade para transformar a experiência de cada piloto em algo inesquecível.
+        </p>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3 fade-up">
+        <div class="sobre-card">
+          <div class="sobre-icon"><i class="fa-solid fa-motorcycle"></i></div>
+          <h4>Curadoria Rigorosa</h4>
+          <p>Selecionamos cada máquina com critérios técnicos e estéticos elevados, garantindo procedência e qualidade impecável.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 fade-up fade-up-delay-1">
+        <div class="sobre-card">
+          <div class="sobre-icon"><i class="fa-solid fa-palette"></i></div>
+          <h4>Customização Exclusiva</h4>
+          <p>Seu estilo, sua moto. Nosso estúdio transforma qualquer máquina em uma extensão da sua personalidade.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 fade-up fade-up-delay-2">
+        <div class="sobre-card">
+          <div class="sobre-icon"><i class="fa-solid fa-users"></i></div>
+          <h4>Comunidade Viva</h4>
+          <p>Mais do que clientes, formamos uma família de pilotos com eventos, passeios e workshops regulares.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 fade-up fade-up-delay-3">
+        <div class="sobre-card">
+          <div class="sobre-icon"><i class="fa-solid fa-headset"></i></div>
+          <h4>Consultoria Hands-On</h4>
+          <p>Nossa equipe vive a cultura das motos. Cada recomendação nasce de experiência real no asfalto.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ PÚBLICO ALVO ══════════════ -->
+<section id="publico">
+  <div class="container">
+    <div class="section-label fade-up">Para Quem Somos</div>
+    <h2 class="section-title mb-5 fade-up fade-up-delay-1">NOSSO<br><span class="accent">PÚBLICO</span></h2>
+
+    <div class="publico-tab-nav fade-up">
+      <button class="tab-btn active" onclick="switchTab('performance', this)">Entusiastas de Performance</button>
+      <button class="tab-btn" onclick="switchTab('viajantes', this)">Viajantes de Longa Distância</button>
+      <button class="tab-btn" onclick="switchTab('lifestyle', this)">Lifestyle Riders</button>
+    </div>
+
+    <div class="tab-content-custom active" id="tab-performance">
+      <div class="publico-img-wrap">
+        <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=700&q=80" alt="Performance" loading="lazy" />
+        <span class="publico-img-tag">Performance</span>
+      </div>
+      <div class="publico-info">
+        <h3>PILOTOS DE ALTA PERFORMANCE</h3>
+        <p>Proprietários de motos Naked e Sport que buscam os melhores upgrades estéticos e funcionais. Para eles, cada detalhe importa: do escape ao guidão, da carenagem ao pneu. A Apex Horizon é o parceiro técnico que entendem a linguagem da velocidade.</p>
+        <div class="publico-tags">
+          <span class="tag">Naked Sport</span>
+          <span class="tag">Alta Cilindrada</span>
+          <span class="tag">Upgrades Técnicos</span>
+          <span class="tag">Estética de Pista</span>
+          <span class="tag">Peças de Performance</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content-custom" id="tab-viajantes">
+      <div class="publico-img-wrap">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80" alt="Viajantes" loading="lazy" />
+        <span class="publico-img-tag">Adventure</span>
+      </div>
+      <div class="publico-info">
+        <h3>VIAJANTES DE LONGA DISTÂNCIA</h3>
+        <p>Big Trail riders que planejam expedições e precisam de equipamentos de proteção, conforto e durabilidade. Para eles, a preparação da moto é tão importante quanto o roteiro. A Apex Horizon entende cada quilômetro dessa jornada.</p>
+        <div class="publico-tags">
+          <span class="tag">Big Trail</span>
+          <span class="tag">Proteção</span>
+          <span class="tag">Conforto</span>
+          <span class="tag">Expedições</span>
+          <span class="tag">Bagageiros</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content-custom" id="tab-lifestyle">
+      <div class="publico-img-wrap">
+        <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=700&q=80" alt="Lifestyle" loading="lazy" />
+        <span class="publico-img-tag">Lifestyle</span>
+      </div>
+      <div class="publico-info">
+        <h3>LIFESTYLE RIDERS</h3>
+        <p>Motociclistas que enxergam a moto como extensão da própria identidade. Buscam customização única, peças exclusivas e um visual que converse com sua personalidade. A Apex Horizon cria experiências personalizadas que vão além da moto.</p>
+        <div class="publico-tags">
+          <span class="tag">Customização</span>
+          <span class="tag">Identidade Visual</span>
+          <span class="tag">Adesivagem Premium</span>
+          <span class="tag">Peças Exclusivas</span>
+          <span class="tag">Estilo Único</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ SOLUÇÕES ══════════════ -->
+<section id="solucoes">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-lg-6 fade-up">
+        <div class="section-label">O Que Entregamos</div>
+        <h2 class="section-title">NOSSAS<br><span class="accent">SOLUÇÕES</span></h2>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3 fade-up">
+        <div class="solucao-card">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Seminovos" class="solucao-img" loading="lazy"/>
+          <div class="solucao-body">
+            <span class="solucao-number">01</span>
+            <h4>Curadoria de Seminovos</h4>
+            <p>Seleção rigorosa de máquinas revisadas com foco em procedência e estética impecável.</p>
+            <a href="#" class="solucao-link">Ver estoque <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 fade-up fade-up-delay-1">
+        <div class="solucao-card">
+          <img src="https://images.unsplash.com/photo-1547949003-9792a18a2601?w=600&q=80" alt="Acessórios" class="solucao-img" loading="lazy"/>
+          <div class="solucao-body">
+            <span class="solucao-number">02</span>
+            <h4>Boutique de Acessórios</h4>
+            <p>Capacetes, jaquetas e peças de performance que unem tecnologia de ponta ao design exclusivo.</p>
+            <a href="#" class="solucao-link">Ver catálogo <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 fade-up fade-up-delay-2">
+        <div class="solucao-card">
+          <img src="https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?w=600&q=80" alt="Customização" class="solucao-img" loading="lazy"/>
+          <div class="solucao-body">
+            <span class="solucao-number">03</span>
+            <h4>Estúdio de Customização</h4>
+            <p>Gráficos personalizados, adesivagem de alta durabilidade e revitalização estética completa.</p>
+            <a href="#configurador" class="solucao-link">Configurar <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 fade-up fade-up-delay-3">
+        <div class="solucao-card">
+          <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80" alt="Consultoria" class="solucao-img" loading="lazy"/>
+          <div class="solucao-body">
+            <span class="solucao-number">04</span>
+            <h4>Consultoria Técnica</h4>
+            <p>Auxílio na escolha do equipamento ideal com base no biotipo e estilo de pilotagem do cliente.</p>
+            <a href="#contato" class="solucao-link">Consultar <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ THE RIDER'S LOUNGE ══════════════ -->
+<section id="lounge">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5 fade-up">
+        <div class="section-label">O Nosso Diferencial</div>
+        <h2 class="section-title mb-4">THE<br>RIDER'S<br><span class="accent">LOUNGE</span></h2>
+        <p style="font-size:1rem;line-height:1.8;color:var(--silver);font-weight:300;margin-bottom:2.5rem;">
+          Esquece a loja fria e transacional. Na Apex Horizon, você acompanha a transformação da sua moto num ambiente que respira cultura motociclística — com café artesanal, cerveja gelada e um papo que você só encontra aqui.
+        </p>
+        <div class="lounge-feature">
+          <div class="lounge-feature-icon"><i class="fa-solid fa-mug-hot"></i></div>
+          <div>
+            <h5>Espaço de Convivência</h5>
+            <p>Área lounge integrada onde você relaxa enquanto sua moto recebe os melhores cuidados.</p>
+          </div>
+        </div>
+        <div class="lounge-feature">
+          <div class="lounge-feature-icon"><i class="fa-solid fa-route"></i></div>
+          <div>
+            <h5>Ride Days Mensais</h5>
+            <p>Passeios guiados que combinam aventura, novas amizades e muita adrenalina no asfalto.</p>
+          </div>
+        </div>
+        <div class="lounge-feature">
+          <div class="lounge-feature-icon"><i class="fa-solid fa-wrench"></i></div>
+          <div>
+            <h5>Workshops Técnicos</h5>
+            <p>Aulas de manutenção básica e segurança para que você conheça de verdade a sua máquina.</p>
+          </div>
+        </div>
+        <div class="lounge-feature">
+          <div class="lounge-feature-icon"><i class="fa-solid fa-display"></i></div>
+          <div>
+            <h5>Configurador Online 3D</h5>
+            <p>Visualize o resultado da customização na sua moto antes mesmo de visitar a loja.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7 fade-up fade-up-delay-2">
+        <div class="lounge-visual" style="padding-bottom:2.5rem;padding-right:0;">
+          <img
+            src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=900&q=80"
+            alt="The Rider's Lounge"
+            class="lounge-main-img"
+            loading="lazy"
+          />
+          <div class="lounge-badge-float">
+            <div class="big-num">+2K</div>
+            <div class="badge-label">Membros na Comunidade</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ RIDE DAYS ══════════════ -->
+<section id="ride-days">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-lg-6 fade-up">
+        <div class="section-label">Próximos Eventos</div>
+        <h2 class="section-title">RIDE<br><span class="accent">DAYS</span></h2>
+      </div>
+      <div class="col-lg-6 fade-up fade-up-delay-1 d-flex align-items-end">
+        <p style="font-size:0.95rem;line-height:1.8;color:var(--silver);font-weight:300;">
+          Participe dos nossos eventos mensais e conecte-se com uma comunidade apaixonada por duas rodas. Vagas limitadas — garanta sua presença.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8 fade-up">
+        <div class="ride-event-card">
+          <div class="event-date"><div class="day">12</div><div class="month">Jul</div></div>
+          <div class="event-divider"></div>
+          <div class="event-info">
+            <h5>Ride Day — Serra da Mantiqueira</h5>
+            <p><i class="fa-solid fa-location-dot me-1" style="color:var(--orange)"></i>Campos do Jordão, SP &nbsp;·&nbsp; Saída às 07h00</p>
+          </div>
+          <span class="event-badge badge-open">Aberto</span>
+        </div>
+        <div class="ride-event-card">
+          <div class="event-date"><div class="day">26</div><div class="month">Jul</div></div>
+          <div class="event-divider"></div>
+          <div class="event-info">
+            <h5>Workshop: Manutenção Preventiva</h5>
+            <p><i class="fa-solid fa-location-dot me-1" style="color:var(--orange)"></i>Loja Apex Horizon &nbsp;·&nbsp; 09h00 às 13h00</p>
+          </div>
+          <span class="event-badge badge-limited">Últimas vagas</span>
+        </div>
+        <div class="ride-event-card">
+          <div class="event-date"><div class="day">09</div><div class="month">Ago</div></div>
+          <div class="event-divider"></div>
+          <div class="event-info">
+            <h5>Night Ride — Litoral Norte SP</h5>
+            <p><i class="fa-solid fa-location-dot me-1" style="color:var(--orange)"></i>Ubatuba, SP &nbsp;·&nbsp; Saída às 21h00</p>
+          </div>
+          <span class="event-badge badge-open">Aberto</span>
+        </div>
+        <div class="ride-event-card">
+          <div class="event-date"><div class="day">23</div><div class="month">Ago</div></div>
+          <div class="event-divider"></div>
+          <div class="event-info">
+            <h5>Encontro de Naked Sports — SP</h5>
+            <p><i class="fa-solid fa-location-dot me-1" style="color:var(--orange)"></i>Interlagos, SP &nbsp;·&nbsp; Dia todo</p>
+          </div>
+          <span class="event-badge badge-sold">Esgotado</span>
+        </div>
+      </div>
+      <div class="col-lg-4 fade-up fade-up-delay-2">
+        <div style="background:rgba(255,102,0,0.07);border:1px solid rgba(255,102,0,0.2);border-radius:4px;padding:2rem;height:100%;display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <div class="section-label mb-2" style="font-size:0.7rem;">Programa de Fidelidade</div>
+            <h4 style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--off-white);line-height:1;margin-bottom:1rem;">APEX<br><span style="color:var(--orange);">RIDER CLUB</span></h4>
+            <p style="font-size:0.88rem;line-height:1.7;color:var(--silver);font-weight:300;margin-bottom:1.5rem;">
+              Membros do clube têm acesso antecipado a eventos, descontos exclusivos em acessórios e prioridade nas vagas de personalização.
+            </p>
+            <ul style="list-style:none;padding:0;margin-bottom:2rem;">
+              <li style="font-size:0.85rem;color:var(--silver);margin-bottom:0.6rem;font-weight:300;"><i class="fa-solid fa-check me-2" style="color:var(--orange)"></i>Acesso prioritário a Ride Days</li>
+              <li style="font-size:0.85rem;color:var(--silver);margin-bottom:0.6rem;font-weight:300;"><i class="fa-solid fa-check me-2" style="color:var(--orange)"></i>10% de desconto em acessórios</li>
+              <li style="font-size:0.85rem;color:var(--silver);margin-bottom:0.6rem;font-weight:300;"><i class="fa-solid fa-check me-2" style="color:var(--orange)"></i>Workshops exclusivos</li>
+              <li style="font-size:0.85rem;color:var(--silver);margin-bottom:0.6rem;font-weight:300;"><i class="fa-solid fa-check me-2" style="color:var(--orange)"></i>Comunidade online privada</li>
+            </ul>
+          </div>
+          <a href="#" class="btn-primary-apex" style="justify-content:center;">
+            Quero fazer parte <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ DEPOIMENTOS ══════════════ -->
+<section id="depoimentos">
+  <div class="container">
+    <div class="section-label fade-up">O Que Dizem</div>
+    <h2 class="section-title mb-5 fade-up fade-up-delay-1">QUEM JÁ<br><span class="accent">VIVEU ISSO</span></h2>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4 fade-up">
+        <div class="depo-card">
+          <div class="depo-quote">"</div>
+          <p class="depo-text">Comprei minha Z900 aqui e o atendimento foi completamente diferente de qualquer outra loja. Eles entenderam exatamente o que eu queria. O Lounge então... virei frequentador fiel.</p>
+          <div class="depo-author">
+            <img src="https://i.pravatar.cc/80?img=11" alt="Rafael" class="depo-avatar" />
+            <div>
+              <div class="depo-name">Rafael Torres</div>
+              <div class="depo-moto">Kawasaki Z900 · Naked</div>
+              <div class="depo-stars mt-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 fade-up fade-up-delay-1">
+        <div class="depo-card">
+          <div class="depo-quote">"</div>
+          <p class="depo-text">A customização gráfica que fizeram na minha Africa Twin ficou surreal. Usaram o configurador online pra me mostrar antes — quando vi ao vivo, estava exatamente igual. Profissionalismo impecável.</p>
+          <div class="depo-author">
+            <img src="https://i.pravatar.cc/80?img=5" alt="Mariana" class="depo-avatar" />
+            <div>
+              <div class="depo-name">Mariana Costa</div>
+              <div class="depo-moto">Honda Africa Twin · Adventure</div>
+              <div class="depo-stars mt-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 fade-up fade-up-delay-2">
+        <div class="depo-card">
+          <div class="depo-quote">"</div>
+          <p class="depo-text">Participei de três Ride Days e cada um foi melhor que o anterior. O pessoal da Apex conhece as melhores estradas. Já indiquei pra todos os amigos do grupo — não tem como não virar fã.</p>
+          <div class="depo-author">
+            <img src="https://i.pravatar.cc/80?img=14" alt="Bruno" class="depo-avatar" />
+            <div>
+              <div class="depo-name">Bruno Almeida</div>
+              <div class="depo-moto">BMW R1300GS · Touring</div>
+              <div class="depo-stars mt-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ CONFIGURADOR / CTA ══════════════ -->
+<section id="configurador" style="background:var(--midnight);">
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-7 text-center fade-up">
+        <div class="section-label" style="justify-content:center;">Configurador Online</div>
+        <h2 class="section-title">MONTE SUA<br><span class="accent">MOTO IDEAL</span></h2>
+        <p style="font-size:1rem;color:var(--silver);font-weight:300;margin-top:1rem;">Preencha o formulário e nossa equipe entra em contato para montar um projeto 100% personalizado para você.</p>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-9 fade-up fade-up-delay-1">
+        <div class="config-card">
+          <div class="row g-4">
+            <div class="col-md-6">
+              <label class="config-form-label">Seu Nome</label>
+              <input type="text" class="config-form-control" placeholder="Ex: João Silva" />
+            </div>
+            <div class="col-md-6">
+              <label class="config-form-label">WhatsApp / Telefone</label>
+              <input type="tel" class="config-form-control" placeholder="(11) 99999-9999" />
+            </div>
+            <div class="col-md-6">
+              <label class="config-form-label">Tipo de Moto</label>
+              <select class="config-form-control">
+                <option>Naked / Sport</option>
+                <option>Big Trail / Adventure</option>
+                <option>Custom / Cruiser</option>
+                <option>Touring</option>
+                <option>Scooter Premium</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="config-form-label">Serviço de Interesse</label>
+              <select class="config-form-control">
+                <option>Compra de Seminovo</option>
+                <option>Customização Visual</option>
+                <option>Acessórios Premium</option>
+                <option>Consultoria Completa</option>
+                <option>Rider Club</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="config-form-label">Descreva Seu Projeto</label>
+              <textarea class="config-form-control" rows="4" placeholder="Conte-nos sobre sua moto atual, o que você quer mudar e qual é a sua visão de personalização..."></textarea>
+            </div>
+            <div class="col-12 text-center">
+              <a href="#" class="btn-primary-apex" style="padding:1rem 3rem;font-size:0.9rem;">
+                <i class="fa-brands fa-whatsapp me-1"></i>
+                Enviar via WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ CONTATO ══════════════ -->
+<section id="contato">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col fade-up">
+        <div class="section-label">Fale Conosco</div>
+        <h2 class="section-title">VENHA NOS<br><span class="accent">VISITAR</span></h2>
+      </div>
+    </div>
+    <div class="row g-5">
+      <div class="col-lg-5 fade-up">
+        <div class="contato-info-item">
+          <div class="contato-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div>
+            <h6>Endereço</h6>
+            <p>Av. dos Motociclistas, 1200 — Galpão A<br>São Paulo, SP — CEP 04001-000</p>
+          </div>
+        </div>
+        <div class="contato-info-item">
+          <div class="contato-icon"><i class="fa-brands fa-whatsapp"></i></div>
+          <div>
+            <h6>WhatsApp</h6>
+            <p>(11) 99999-0000</p>
+          </div>
+        </div>
+        <div class="contato-info-item">
+          <div class="contato-icon"><i class="fa-solid fa-envelope"></i></div>
+          <div>
+            <h6>E-mail</h6>
+            <p>contato@apexhorizon.com.br</p>
+          </div>
+        </div>
+        <div class="contato-info-item">
+          <div class="contato-icon"><i class="fa-solid fa-clock"></i></div>
+          <div>
+            <h6>Horário de Funcionamento</h6>
+            <p>Seg–Sex: 09h00 às 19h00<br>Sábado: 10h00 às 16h00</p>
+          </div>
+        </div>
+        <div class="footer-social mt-3">
+          <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-tiktok"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-7 fade-up fade-up-delay-1">
+        <div class="map-placeholder">
+          <i class="fa-solid fa-map-location-dot"></i>
+          <span>Mapa — Apex Horizon Moto Concept</span>
+          <span style="font-size:0.72rem;opacity:0.5;">Av. dos Motociclistas, 1200 — São Paulo, SP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="footer-brand">APEX <span>HORIZON</span></div>
+        <p class="footer-desc">Mais do que motos — uma experiência completa de estilo de vida sobre duas rodas. Performance, aventura e comunidade em um único lugar.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-tiktok"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-facebook"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2 offset-lg-1">
+        <p class="footer-heading">Navegação</p>
+        <ul class="footer-links">
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#solucoes">Soluções</a></li>
+          <li><a href="#lounge">The Lounge</a></li>
+          <li><a href="#ride-days">Ride Days</a></li>
+          <li><a href="#depoimentos">Reviews</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2">
+        <p class="footer-heading">Serviços</p>
+        <ul class="footer-links">
+          <li><a href="#">Seminovos</a></li>
+          <li><a href="#">Customização</a></li>
+          <li><a href="#">Acessórios</a></li>
+          <li><a href="#">Consultoria</a></li>
+          <li><a href="#">Rider Club</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3">
+        <p class="footer-heading">Newsletter</p>
+        <p style="font-size:0.85rem;color:var(--silver);font-weight:300;margin-bottom:1rem;">Receba novidades, eventos e conteúdo exclusivo para pilotos.</p>
+        <div style="display:flex;gap:0;">
+          <input type="email" class="config-form-control" placeholder="seu@email.com" style="border-radius:2px 0 0 2px;border-right:none;" />
+          <button style="background:var(--orange);border:none;padding:0 1rem;border-radius:0 2px 2px 0;color:var(--midnight);cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='#cc5200'" onmouseout="this.style.background='var(--orange)'">
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <hr class="footer-divider" />
+    <div class="footer-bottom">
+      <span>© 2025 Apex Horizon Moto Concept. Todos os direitos reservados.</span>
+      <span>Feito com <span style="color:var(--orange);">♥</span> para quem vive sobre duas rodas</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Navbar scroll effect
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.style.background = window.scrollY > 80
+      ? 'rgba(17,17,17,0.97)'
+      : 'rgba(17,17,17,0.85)';
+  });
+
+  // Fade-up on scroll
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  fadeEls.forEach(el => observer.observe(el));
+
+  // Trigger visible on hero immediately
+  document.querySelectorAll('#hero .fade-up').forEach((el, i) => {
+    setTimeout(() => el.classList.add('visible'), 100 + i * 150);
+  });
+
+  // Tabs
+  function switchTab(id, btn) {
+    document.querySelectorAll('.tab-content-custom').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>
